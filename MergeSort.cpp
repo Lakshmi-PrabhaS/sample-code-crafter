@@ -1,3 +1,4 @@
+// Copyright 2024 notMine
 #include <iostream>
 
 void PrintArray(int *array, int n) {
