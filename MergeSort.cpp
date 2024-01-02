@@ -7,22 +7,22 @@ void PrintArray(int *array, int n) {
 }
 
 void Merger(int arr[], int lo, int  mi, int hi) {
-    int *temp = new int[hi-lo+1];  //temporary merger array
-    int i = lo, j = mi + 1;  //i is for left-hand,j is for right-hand
-    int k = 0;  //k is for the temporary array
+    int *temp = new int[hi-lo+1];  // temporary merger array
+    int i = lo, j = mi + 1;  // i is for left-hand,j is for right-hand
+    int k = 0;  // k is for the temporary array
     while (i <= mi && j <=hi) {
         if (arr[i] <= arr[j])
             temp[k++] = arr[i++];
         else
             temp[k++] = arr[j++];
     }
-    //rest elements of left-half
+    // rest elements of left-half
     while (i <= mi)
         temp[k++] = arr[i++];
-      //rest elements of right-half
+      // rest elements of right-half
     while (j <= hi)
         temp[k++] = arr[j++];
-      //copy the merged temporary array to the original array
+      // copy the merged temporary array to the original array
     for (k = 0, i = lo; i <= hi; ++i, ++k)
         arr[i] = temp[k];
 
