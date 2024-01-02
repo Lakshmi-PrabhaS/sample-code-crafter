@@ -1,7 +1,7 @@
 // Copyright 2024 notMine
 #include <iostream>
 
-void PrintArray(int *array, int n) {
+void print_Array(int *array, int n) {
   for (int i = 0; i < n; ++i)
     std::cout << array[i] << " " << std::flush;
   std::cout << std::endl;
