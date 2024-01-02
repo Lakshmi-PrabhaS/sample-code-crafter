@@ -1,17 +1,19 @@
-name: Code Quality Check
-
-on: [push]
+# .github/workflows/code_review.yml
+name: Code Review
+on: [push, pull_request]
 
 jobs:
-  quality_check:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
-    - name: Install clang-tidy
-      run: sudo apt-get install -y clang-tidy
+    - name: Install Clang
+      run: sudo apt-get install clang libclang-dev llvm-dev
 
-    - name: Run clang-tidy
-      run: clang-tidy -checks=-*,readability-identifier-naming -config='{CheckOptions: [{key: readability-identifier-naming.TypeCase, value: CamelCase}]}' *.cpp
+    - name: Build AST parser
+      run: g++ custom_check.cpp -o custom_check `llvm-config --cxxflags --ldflags --libs` -lclang
+
+    - name: Run AST parser
+      run: find . -name '*.cpp' -exec ./custom_check {} \;
