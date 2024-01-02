@@ -1,18 +1,16 @@
+# .github/workflows/code_review.yml
 name: Code Review
-
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    - name: Install cpplint
-      run: |
-        sudo apt-get install python3-pip
-        pip3 install cpplint
-    - name: Run cpplint
-      run: |
-        cpplint --recursive .
+
+    - name: Install cppcheck
+      run: sudo apt-get install cppcheck
+
+    - name: Run cppcheck
+      run: cppcheck --enable=all --error-exitcode=1 .
