@@ -43,6 +43,6 @@ public:
 };
 
 int main(int argc, char **argv) {
-  clang::tooling::runToolOnCode(new VariableNamingAction, argv[1]);
+  clang::tooling::runToolOnCode(std::make_unique<VariableNamingAction>(), argv[1]);
   return 0;
 }
