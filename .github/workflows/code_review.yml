@@ -13,7 +13,6 @@ jobs:
       run: sudo apt-get install clang libclang-dev llvm-dev
 
     - name: Build AST parser
-      run: g++ custom_check.cpp -o custom_check `llvm-config --cxxflags --ldflags --libs` -lclang
-
+      run: g++ custom_check.cpp -o custom_check `llvm-config --cxxflags --ldflags --libs --system-libs` -lclangAST -lclangBasic -lclangFrontend -lclangTooling
     - name: Run AST parser
       run: find . -name '*.cpp' -exec ./custom_check {} \;
