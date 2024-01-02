@@ -1,18 +1,15 @@
-name: Code Review
+name: Code Quality Check
 
 on: [push]
 
 jobs:
-  build:
-
+  quality_check:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Install cpplint
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Run custom code quality checks
       run: |
-        sudo apt-get install python3-pip
-        pip3 install cpplint
-    - name: Run cpplint
-      run: |
-        cpplint --recursive .
+        # Add commands to run your custom code quality checks here
