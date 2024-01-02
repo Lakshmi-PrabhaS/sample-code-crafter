@@ -9,14 +9,7 @@ class VariableNamingVisitor
 public:
   bool VisitVarDecl(clang::VarDecl *varDecl) {
     std::string varName = varDecl->getNameAsString();
-    if (varDecl->isConstexpr()) {
-      for (char c : varName) {
-        if (!std::isupper(c) && c != '_') {
-          llvm::errs() << "Constant name is not all uppercase or does not use underscores: " << varName << "\n";
-          break;
-        }
-      }
-    } else if (!varName.empty() && !std::islower(varName[0])) {
+    if (!varName.empty() && !std::islower(varName[0])) {
       llvm::errs() << "Variable name does not start with lower case: " << varName << "\n";
     }
     return true;
@@ -43,6 +36,6 @@ public:
 };
 
 int main(int argc, char **argv) {
-  clang::tooling::runToolOnCode(std::make_unique<VariableNamingAction>(), argv[1]);
+  clang::tooling::runToolOnCode(new VariableNamingAction, argv[1]);
   return 0;
 }
