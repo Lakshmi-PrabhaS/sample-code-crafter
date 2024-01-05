@@ -42,6 +42,7 @@ void MergeSortHelper(int arr[], int lo, int hi) {
 
 void MergeSort(int arr[], int arr_size) {
     MergeSortHelper(arr, 0, arr_size-1);
+    // MyNote: How you doing?
 }
 
 int main() {
