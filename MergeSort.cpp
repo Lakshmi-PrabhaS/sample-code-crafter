@@ -45,6 +45,12 @@ void MergeSort(int arr[], int arr_size) {
     // MyNote: How you doing?
 }
 
+int buyChoco(vector<int>& prices, int money) {
+      sort(prices.begin(), prices.end());
+      int possible_min = prices[0] + prices[1];
+      return possible_min > money ? money : (money - possible_min);
+  }
+
 int main() {
   int array[] = {94, 42, 50, 95, 333, 65, 54, 456, 1, 1234};
   int n = sizeof(array)/sizeof(array[0]);
