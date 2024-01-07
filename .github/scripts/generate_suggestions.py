@@ -114,17 +114,16 @@ for pull in pulls:
         file_name = file.filename
         file_type = file_name.split('.')[-1]  # Get the file extension
         file_diff = file.patch  # Get the diff of the file
-        reviews = pull.get_reviews()
-        for review in reviews:
-            if review.state == 'COMMENTED':
-                line_at_position = get_lines_at_position(file_diff, review.position)
-                # Use the GPT-3 model to generate a code suggestion
-                response = openai.ChatCompletion.create(
-                  model="gpt-3.5-turbo",
-                  messages=[
-                      {"role": "system", "content": "You are a helpful assistant."},
-                      {"role": "user", "content": f"Generate a code suggestion for this comment: {review.body}. The file is {file_name} and the language is {file_type}. Here is the line of code: {line_at_position}"},
-                  ]
-                )
-                code_suggestion = response['choices'][0]['message']['content']
-                pull.create_issue_comment(code_suggestion)
+        comments = pull.get_review_comments()
+        for comment in comments:
+            line_at_position = get_lines_at_position(file_diff, comment.position)
+            # Use the GPT-3 model to generate a code suggestion
+            response = openai.ChatCompletion.create(
+              model="gpt-3.5-turbo",
+              messages=[
+                  {"role": "system", "content": "You are a helpful assistant."},
+                  {"role": "user", "content": f"Generate a code suggestion for this comment: {comment.body}. The language is {file_type}. Here is the line of code: {line_at_position}"},
+              ]
+            )
+            code_suggestion = response['choices'][0]['message']['content']
+            pull.create_issue_comment(code_suggestion)
