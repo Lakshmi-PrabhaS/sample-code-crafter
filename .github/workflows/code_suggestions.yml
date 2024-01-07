@@ -10,6 +10,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
       REPO_NAME: ${{ github.repository }}
       OWNER_NAME: ${{ github.repository_owner }}
+      OPENAI_API_KEY: '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'
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
