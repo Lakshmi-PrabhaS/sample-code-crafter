@@ -1,7 +1,7 @@
 import os
 from github import Github
 
-GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
+GITHUB_TOKEN = os.getenv('MY_GITHUB_TOKEN')
 REPO_NAME = os.getenv('REPO_NAME')
 OWNER_NAME = os.getenv('OWNER_NAME')
 
