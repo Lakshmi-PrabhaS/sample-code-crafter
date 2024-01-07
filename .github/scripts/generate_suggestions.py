@@ -86,7 +86,7 @@ for pull in pulls:
                   model="gpt-3.5-turbo",
                   messages=[
                       {"role": "system", "content": "You are a helpful assistant."},
-                      {"role": "user", "content": f"Generate a code suggestion for this comment: {review.body}. The file is {file_name} and the language is {file_type}."},
+                      {"role": "user", "content": f"Generate a code suggestion for this comment: {review.body}. The language is {file_type}."},
                   ]
                 )
                 code_suggestion = response['choices'][0]['message']['content']
