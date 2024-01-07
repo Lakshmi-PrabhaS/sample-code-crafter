@@ -116,13 +116,12 @@ for pull in pulls:
         file_diff = file.patch  # Get the diff of the file
         comments = pull.get_review_comments()
         for comment in comments:
-            line_at_position = get_lines_at_position(file_diff, comment.position)
             # Use the GPT-3 model to generate a code suggestion
             response = openai.ChatCompletion.create(
               model="gpt-3.5-turbo",
               messages=[
                   {"role": "system", "content": "You are a helpful assistant."},
-                  {"role": "user", "content": f"Generate a code suggestion for this comment: {comment.body}. The language is {file_type}. Here is the line of code: {line_at_position}"},
+                  {"role": "user", "content": f"Generate a code suggestion for this comment: {comment.body}. The language is {file_type}. Here is the diff: {file_diff}"},
               ]
             )
             code_suggestion = response['choices'][0]['message']['content']
