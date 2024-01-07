@@ -9,6 +9,10 @@ OWNER_NAME = os.getenv('OWNER_NAME')
 # Set up the GitHub client with your personal access token
 g = Github(GITHUB_TOKEN)
 
+print(f"OWNER_NAME: {OWNER_NAME}")
+print(f"REPO_NAME: {REPO_NAME}")
+print(f"GITHUB_TOKEN starts with: {GITHUB_TOKEN[:5]}")
+
 repo = g.get_repo(f"{OWNER_NAME}/{REPO_NAME}")
 
 # Fetch the pull requests
