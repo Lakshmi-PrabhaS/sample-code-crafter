@@ -55,5 +55,5 @@ int main() {
 
   std::cout << "After Merge Sort :" << std::endl;
   PrintArray(array, n);
-  return (0);
+  return 0;
 }
