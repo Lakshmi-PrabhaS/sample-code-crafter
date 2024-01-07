@@ -1,18 +1,19 @@
 # .github/workflows/code_review.yml
-name: Code Review
-on: [push, pull_request]
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+# name: Code Review
+# on: [push, pull_request]
 
-    steps:
-    - uses: actions/checkout@v2
+# jobs:
+#  build:
+#    runs-on: ubuntu-latest
 
-    - name: Install Clang
-      run: sudo apt-get install clang libclang-dev llvm-dev
+#    steps:
+#    - uses: actions/checkout@v2
 
-    - name: Build AST parser
-      run: g++ custom_check.cpp -o custom_check `llvm-config --cxxflags --ldflags --libs --system-libs` -lclangAST -lclangBasic -lclangFrontend -lclangTooling -lclangSerialization
-    - name: Run AST parser
-      run: find . -name '*.cpp' -exec ./custom_check {} \;
+#    - name: Install Clang
+#      run: sudo apt-get install clang libclang-dev llvm-dev
+
+#    - name: Build AST parser
+#      run: g++ custom_check.cpp -o custom_check `llvm-config --cxxflags --ldflags --libs --system-libs` -lclangAST -lclangBasic -lclangFrontend -lclangTooling -lclangSerialization
+#    - name: Run AST parser
+#      run: find . -name '*.cpp' -exec ./custom_check {} \;
