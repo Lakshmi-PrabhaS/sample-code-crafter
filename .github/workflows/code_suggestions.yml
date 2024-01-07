@@ -6,6 +6,10 @@ on:
 jobs:
   generate_suggestions:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      REPO_NAME: ${{ github.repository }}
+      OWNER_NAME: ${{ github.repository_owner }}
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
