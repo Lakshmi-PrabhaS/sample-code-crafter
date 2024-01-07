@@ -21,6 +21,6 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install PyGithub  # This is a Python library for the GitHub API
+        pip install openai PyGithub
     - name: Generate and post code suggestions
       run: python .github/scripts/generate_suggestions.py
