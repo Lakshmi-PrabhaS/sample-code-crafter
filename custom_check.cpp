@@ -26,6 +26,7 @@ private:
   VariableNamingVisitor visitor;
 };
 
+
 class VariableNamingAction : public clang::ASTFrontendAction {
 public:
   virtual std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(
