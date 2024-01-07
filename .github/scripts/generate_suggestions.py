@@ -13,7 +13,8 @@ print(f"OWNER_NAME: {OWNER_NAME}")
 print(f"REPO_NAME: {REPO_NAME}")
 print(f"GITHUB_TOKEN starts with: {GITHUB_TOKEN}")
 
-repo = g.get_repo(f"{OWNER_NAME}/{REPO_NAME}")
+# repo = g.get_repo(f"{OWNER_NAME}/{REPO_NAME}")
+repo = g.get_repo(f"{REPO_NAME}")
 
 # Fetch the pull requests
 pulls = repo.get_pulls(state='open')
