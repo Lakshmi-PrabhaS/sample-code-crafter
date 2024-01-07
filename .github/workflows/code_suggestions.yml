@@ -6,11 +6,12 @@ on:
 jobs:
   generate_suggestions:
     runs-on: ubuntu-latest
+    environment: 'CodeCraFter'
     env:
       GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
       REPO_NAME: ${{ github.repository }}
       OWNER_NAME: ${{ github.repository_owner }}
-      OPENAI_API_KEY: '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'
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
