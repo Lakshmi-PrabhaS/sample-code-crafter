@@ -57,6 +57,7 @@ repo = g.get_repo(f"{REPO_NAME}")
 
 pulls = repo.get_pulls(state='open')
 
+'''
 for pull in pulls:
     reviews = pull.get_reviews()
     for review in reviews:
@@ -71,3 +72,22 @@ for pull in pulls:
             )
             code_suggestion = response['choices'][0]['message']['content']
             pull.create_issue_comment(code_suggestion)
+'''
+for pull in pulls:
+    files = pull.get_files()
+    for file in files:
+        file_name = file.filename
+        file_type = file_name.split('.')[-1]  # Get the file extension
+        reviews = pull.get_reviews()
+        for review in reviews:
+            if review.state == 'COMMENTED':
+                # Use the GPT-3 model to generate a code suggestion
+                response = openai.ChatCompletion.create(
+                  model="gpt-3.5-turbo",
+                  messages=[
+                      {"role": "system", "content": "You are a helpful assistant."},
+                      {"role": "user", "content": f"Generate a code suggestion for this comment: {review.body}. The file is {file_name} and the language is {file_type}."},
+                  ]
+                )
+                code_suggestion = response['choices'][0]['message']['content']
+                pull.create_issue_comment(code_suggestion)
