@@ -125,4 +125,6 @@ for pull in pulls:
               ]
             )
             code_suggestion = response['choices'][0]['message']['content']
-            pull.create_issue_comment(code_suggestion)
+            comment_with_suggestion = f"**{comment.body}**\n```{code_suggestion}```"
+            pull.create_issue_comment(comment_with_suggestion)
+            
