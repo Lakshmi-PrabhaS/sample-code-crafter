@@ -52,7 +52,8 @@ OWNER_NAME = os.getenv('OWNER_NAME')
 openai.api_key = os.getenv('OPENAI_API_KEY')  # Set the OpenAI API key
 
 g = Github(GITHUB_TOKEN)
-repo = g.get_repo(f"{OWNER_NAME}/{REPO_NAME}")
+# repo = g.get_repo(f"{OWNER_NAME}/{REPO_NAME}")
+repo = g.get_repo(f"{REPO_NAME}")
 
 pulls = repo.get_pulls(state='open')
 
