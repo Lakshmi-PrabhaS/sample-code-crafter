@@ -107,7 +107,6 @@ def get_lines_at_position(diff, position):
             # This is the line at the given position
             return line
     return None
-
 for pull in pulls:
     files = pull.get_files()
     for file in files:
@@ -116,15 +115,15 @@ for pull in pulls:
         file_diff = file.patch  # Get the diff of the file
         comments = pull.get_review_comments()
         for comment in comments:
-            # Use the GPT-3 model to generate a code suggestion
-            response = openai.ChatCompletion.create(
-              model="gpt-3.5-turbo",
-              messages=[
-                  {"role": "system", "content": "You are a helpful assistant."},
-                  {"role": "user", "content": f"Generate a code suggestion for this comment: {comment.body}. The language is {file_type}. Please give a concise answer with only the code change that is required. Here is the diff: {file_diff}"},
-              ]
-            )
-            code_suggestion = response['choices'][0]['message']['content']
-            comment_with_suggestion = f"**{comment.body}**\n```{code_suggestion}```"
-            pull.create_issue_comment(comment_with_suggestion)
-            
+            if comment.path == file.filename:  # Check if the comment is for the current file
+                # Use the GPT-3 model to generate a code suggestion
+                response = openai.ChatCompletion.create(
+                  model="gpt-3.5-turbo",
+                  messages=[
+                      {"role": "system", "content": "You are a helpful assistant."},
+                      {"role": "user", "content": f"Generate a code suggestion for this comment: {comment.body}. The language is {file_type}. Please give a concise answer with only the code change that is required. Here is the diff: {file_diff}"},
+                  ]
+                )
+                code_suggestion = response['choices'][0]['message']['content']
+                comment_with_suggestion = f"**{comment.body}**\n```{code_suggestion}```"
+                pull.create_issue_comment(comment_with_suggestion)
