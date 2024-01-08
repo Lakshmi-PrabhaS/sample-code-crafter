@@ -108,4 +108,32 @@ public class Graph {
 
         return matrix;
     }
+
+    public static boolean isBipartite(Vector<Vector<Integer>> graph) {
+        int n = graph.size();
+        int[] color = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            if (color[i] != 0) continue;
+
+            color[i] = 1;
+            Queue<Integer> queue = new LinkedList<>();
+            queue.add(i);
+
+            while (!queue.isEmpty()) {
+                int t = queue.poll();
+
+                for (int neighbor : graph.get(t)) {
+                    if (color[neighbor] == 0) {
+                        color[neighbor] = 3 - color[t];
+                        queue.add(neighbor);
+                    } else if (color[neighbor] == color[t]) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
 }

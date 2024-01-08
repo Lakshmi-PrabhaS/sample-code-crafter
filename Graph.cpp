@@ -98,4 +98,23 @@ class Graph {
 
 		return matrix;
 	}
+
+	void calculate(int decider, int &a, int &b, int&c) {
+		if(decider == 0)
+		{
+			a = b * c;
+		}
+		else if(decider == 1)
+		{
+			c = b - a;
+		}
+		else if(decider == 2)
+		{
+			b = a + c;
+		}
+		else
+		{
+			a = b = c = 0;
+		}
+	}
  };

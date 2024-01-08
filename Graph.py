@@ -88,3 +88,14 @@ class Graph:
                     queue.put((l, r + 1))
 
         return matrix
+
+    def count_colors(color_array):
+        color_count = {}  # Dictionary to store the count of each color
+    
+        for color in color_array:
+            if color in color_count:
+                color_count[color] += 1
+            else:
+                color_count[color] = 1
+    
+        return color_count
